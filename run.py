@@ -1,4 +1,5 @@
 import telebot
+import re
 
 bot = telebot.TeleBot("242501698:AAFrulS4H9AaycbFUAJPhXz5No6ibmhxIys")
 
@@ -14,6 +15,12 @@ def echo_all(message):
     text = message.text
     if 'ПИДОР' in text.upper():
         bot.reply_to(message, 'Слышь, ты сам пидор!')
+    if 'НЕТ' in text.upper():
+        bot.reply_to(message, 'Пидора ответ')
+    if 'ДА' in text.upper():
+        bot.reply_to(message, 'Манда')
+    if re.search(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', text):
+        bot.reply_to(message, 'Боян')
 
 
 bot.polling()
