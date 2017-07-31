@@ -1,5 +1,6 @@
 import telebot
 import re
+import random
 
 bot = telebot.TeleBot("242501698:AAFrulS4H9AaycbFUAJPhXz5No6ibmhxIys")
 
@@ -21,6 +22,16 @@ def echo_all(message):
         bot.reply_to(message, 'Манда')
     if re.search(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', text):
         bot.reply_to(message, 'Боян')
+    if 'ПОШЕЛ НАХУЙ' in text.upper():
+        bot.reply_to(message, 'Сам пошел нахуй')
+    if 'ГО' in text.upper():
+        bot.reply_to(message, 'Го по пиву лучше')
+
+
+@bot.message_handler(content_types=['document', 'audio', 'photo'])
+def handle_docs(message):
+    bot.reply_to(message, random.choice(['ну и хуйня!', "дерьмище", "срань господня", "что за залупа?"
+                                         , "лучше бы ты эту хуйню не присылал"]))
 
 
 bot.polling()
