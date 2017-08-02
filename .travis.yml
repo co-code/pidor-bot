@@ -16,8 +16,8 @@ deploy:
   function_name: pidorbot
   role: arn:aws:iam::879151756208:role/lambda
   handler_name: lambda_handler
-  module_name: lambda
+  module_name: run
   zip: squash.zip
-  runtime: python2.7
+  runtime: python3.6
   on:
     branch: master
