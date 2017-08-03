@@ -3,38 +3,63 @@ import os
 import telebot
 import random
 import json
+import re
+import logging
 
-telegram_api_key = os.environ.get("TOKEN")
-bot = telebot.TeleBot(telegram_api_key)
+
+def init():
+    global bot
+    global logger
+    global data
+
+    console = logging.StreamHandler()
+    console.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(
+        '[%(levelname)5s] (%(threadName)s) - %(asctime)-15s : %(message)s')
+    console.setFormatter(formatter)
+    logging.getLogger('').addHandler(console)
+
+    logger = logging.getLogger('pidor-bot')
+
+    with open('answers.json', encoding='utf-8') as f:
+        telegram_api_key = os.environ.get('TOKEN')
+        bot = telebot.TeleBot(telegram_api_key)
+        data = json.loads(f.read())
 
 
 def lambda_handler(event, context):
+
     try:
+        logger.debug(event)
+
         body = json.loads(event['body'])
         message = telebot.types.Message.de_json(body['message'])
         text = message.text
-        words = text.upper().split(' ')
-        if 'ПИДОР' in words:
-            bot.reply_to(message, random.choice(['слышь, ты сам пидор', 'сам пидор']))
-        if 'CИДОР' in words:
-            bot.reply_to(message, random.choice(['это я люблю']))
-        if 'НЕТ' in words:
-            bot.reply_to(message, random.choice(['пидора ответ']))
-        if 'ДА' in words:
-            bot.reply_to(message, random.choice(['манда', 'хуй на']))
-        if 'ПОШЕЛ НАХУЙ' in words:
-            bot.reply_to(message, random.choice(['сам пошел нахуй']))
-        if 'ГО' in words:
-            bot.reply_to(message, random.choice(['го по пиву лучше']))
-        if ')' in text:
-            bot.reply_to(message, random.choice(['гы)))', '))))))))))))))))))))))']))
+
+        logger.info(text)
+
+        for question, answers in data:
+            if re.match(question, text):
+                bot.reply_to(message, random.choice(answers))
+
+        return {
+            'statusCode': 200,
+            'body': str(event),
+            'headers': {
+                'Content-Type': 'application/json'
+            }
+        }
+
     except Exception as e:
-        print(str(e))
-        print(str(event))
-    finally:
-        return {"statusCode": 200,
-                "body": str(event),
-                "headers": {
-                    'Content-Type': 'application/json'
-                }
-                }
+        logger.error(e)
+
+        return {
+            'statusCode': 500,
+            'body': str(e),
+            'headers': {
+                'Content-Type': 'application/json'
+            }
+        }
+
+
+init()
