@@ -1,0 +1,23 @@
+language: python
+sudo: required
+dist: trusty
+
+install: pip install -r requirements.txt  -t .
+
+script: echo script
+
+before_deploy:
+  - zip -r squash.zip *
+
+deploy:
+  provider: lambda
+  access_key_id: $access_key_id 
+  secret_access_key: $secret_access_key
+  function_name: pidorbot
+  role: arn:aws:iam::879151756208:role/lambda
+  handler_name: lambda_handler
+  module_name: lambda
+  zip: squash.zip
+  runtime: python2.7
+  on:
+    branch: master
