@@ -11,8 +11,11 @@ def lambda_handler(event, context):
     try:
         message = telebot.types.Message.de_json(eval(event['body'])['message'])
         text = message.text
+        print(text)
         if 'ПИДОР' in text.upper():
             bot.reply_to(message, random.choice(['слышь, ты сам пидор', 'сам пидор']))
+        if 'CИДОР' in text.upper():
+            bot.reply_to(message, random.choice(['это я люблю']))
         if 'НЕТ' in text.upper():
             bot.reply_to(message, random.choice(['пидора ответ']))
         if 'ДА' in text.upper():
