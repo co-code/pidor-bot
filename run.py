@@ -13,17 +13,18 @@ def lambda_handler(event, context):
         body = json.loads(event['body'])
         message = telebot.types.Message.de_json(body['message'])
         text = message.text
-        if 'ПИДОР' in text.upper():
+        words = text.upper().split(' ')
+        if 'ПИДОР' in words:
             bot.reply_to(message, random.choice(['слышь, ты сам пидор', 'сам пидор']))
-        if 'CИДОР' in text.upper():
+        if 'CИДОР' in words:
             bot.reply_to(message, random.choice(['это я люблю']))
-        if 'НЕТ' in text.upper():
+        if 'НЕТ' in words:
             bot.reply_to(message, random.choice(['пидора ответ']))
-        if 'ДА' in text.upper():
+        if 'ДА' in words:
             bot.reply_to(message, random.choice(['манда', 'хуй на']))
-        if 'ПОШЕЛ НАХУЙ' in text.upper():
+        if 'ПОШЕЛ НАХУЙ' in words:
             bot.reply_to(message, random.choice(['сам пошел нахуй']))
-        if 'ГО' in text.upper():
+        if 'ГО' in words:
             bot.reply_to(message, random.choice(['го по пиву лучше']))
     except Exception as e:
         print(str(e))
