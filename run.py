@@ -26,6 +26,8 @@ def lambda_handler(event, context):
             bot.reply_to(message, random.choice(['сам пошел нахуй']))
         if 'ГО' in words:
             bot.reply_to(message, random.choice(['го по пиву лучше']))
+        if ')' in text:
+            bot.reply_to(message, random.choice(['гы)))', '))))))))))))))))))))))']))
     except Exception as e:
         print(str(e))
         print(str(event))
