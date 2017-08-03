@@ -2,9 +2,11 @@ language: python
 sudo: required
 dist: trusty
 
-install: pip install -r requirements.txt  -t .
+install:
+  - pip install -r requirements.txt  -t .
+  - pip install pep8
 
-script: echo script
+script: pep8 run.py
 
 before_deploy:
   - zip -r squash.zip *
