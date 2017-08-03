@@ -19,5 +19,6 @@ deploy:
   module_name: run
   zip: squash.zip
   runtime: python3.6
+  publish: true
   on:
     branch: master
