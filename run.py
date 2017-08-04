@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import os
-import telebot
-import random
 import json
+import os
+import random
 import re
-import logging
+
+import telebot
 
 
 def init():
@@ -12,20 +12,13 @@ def init():
     global logger
     global data
 
-    console = logging.StreamHandler()
-    console.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(
-        '[%(levelname)5s] (%(threadName)s) - %(asctime)-15s : %(message)s')
-    console.setFormatter(formatter)
-    logging.getLogger('').addHandler(console)
-
-    logger = logging.getLogger('pidor-bot')
-
     with open('answers.json', encoding='utf-8') as f:
         data = json.loads(f.read())
 
     telegram_api_key = os.environ.get('TOKEN')
     bot = telebot.TeleBot(telegram_api_key)
+
+    logger = telebot.logger
 
 
 def lambda_handler(event, context):
