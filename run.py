@@ -22,13 +22,13 @@ def init():
     logger = logging.getLogger('pidor-bot')
 
     with open('answers.json', encoding='utf-8') as f:
-        telegram_api_key = os.environ.get('TOKEN')
-        bot = telebot.TeleBot(telegram_api_key)
         data = json.loads(f.read())
+
+    telegram_api_key = os.environ.get('TOKEN')
+    bot = telebot.TeleBot(telegram_api_key)
 
 
 def lambda_handler(event, context):
-
     try:
         logger.debug(event)
 
