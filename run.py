@@ -1,58 +1,47 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-import random
-import re
-
 import telebot
+
+from util.log_helper import log
+from util.example_event import example
+from dialog.engine import DialogEngine
 
 
 def init():
     global bot
-    global logger
-    global data
+    global dialog_engine
 
-    with open('answers.json', encoding='utf-8') as f:
-        data = json.loads(f.read())
+    dialog_engine = DialogEngine()
 
     telegram_api_key = os.environ.get('TOKEN')
     bot = telebot.TeleBot(telegram_api_key)
 
-    logger = telebot.logger
 
-
-def lambda_handler(event, context):
+def lambda_handler(event, context, offline_mode=False):
     try:
-        logger.debug(event)
-
+        log('Event: ' + str(event))
         body = json.loads(event['body'])
         message = telebot.types.Message.de_json(body['message'])
-        text = message.text
-
-        logger.info(text)
-
-        for question, answers in data:
-            if re.match(question, text):
-                bot.reply_to(message, random.choice(answers))
-
-        return {
-            'statusCode': 200,
-            'body': str(event),
-            'headers': {
-                'Content-Type': 'application/json'
-            }
-        }
+        answer = dialog_engine.choose_answer(message)
+        if not offline_mode:
+            bot.reply_to(message, answer)
+        else:
+            log('Answer: ' + str(answer))
 
     except Exception as e:
-        logger.error(e)
+        log('Error: ' + str(e))
 
-        return {
-            'statusCode': 500,
-            'body': str(e),
-            'headers': {
-                'Content-Type': 'application/json'
-            }
+    return {
+        'statusCode': 200,
+        'body': str(event),
+        'headers': {
+            'Content-Type': 'application/json'
         }
+    }
 
 
 init()
+
+if __name__ == '__main__':
+    lambda_handler(event=example, context=None, offline_mode=True)
