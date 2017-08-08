@@ -6,7 +6,9 @@ install:
   - pip install -r requirements.txt  -t .
   - pip install pep8
 
-script: pep8 run.py
+script:
+  - pep8 run.py
+  - python -m unittest discover -s test
 
 before_deploy:
   - zip -r squash.zip *
