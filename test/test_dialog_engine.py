@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from telebot.types import Message
 from dialog.engine import DialogEngine
 
 
@@ -30,19 +29,11 @@ class TestDialogEngine(unittest.TestCase):
                 'пидора ответ'
             ],
             'пидoр': [
-                'пидор твой дед',
+                'пидор дед твой',
                 'ты сам пидор',
-                'пойдем пить сидор'
             ],
             'сидoр': [
                 'это я люблю',
-                'кто не пьет, тот пидор'
-            ],
-            'го': [
-                'го к еноту',
-                'го пить сидор',
-                'го бухать',
-                'го калик курить'
             ],
             '))))': [
                 'гы))))'
