@@ -52,6 +52,49 @@ class TestDialogEngine(unittest.TestCase):
             print(k, v, answer)
             self.assertTrue(answer in v)
 
+    def test_some_case_insensitive(self):
+        ls = {
+            'Привет': [
+                'ну привет',
+                'тебя не звали, иди отсюда'
+            ],
+            'ПрBвЕт': [
+                'ну привет',
+                'тебя не звали, иди отсюда'
+            ],
+            'Пока': [
+                'ну пока',
+                'ну и пиздуй'
+            ],
+            'пизда': [
+                'не ругайся!'
+            ],
+            'да': [
+                'манда',
+                'хуй на'
+            ],
+            'нет': [
+                'пидора ответ'
+            ],
+            'пидoр': [
+                'пидор дед твой',
+                'ты сам пидор',
+            ],
+            'сидОр': [
+                'это я люблю',
+            ],
+            'Го': [
+                'го по пиву лучше '
+            ],
+            'гO гулять': [
+                'го по пиву лучше '
+            ]
+        }
+
+        for k, v in ls.items():
+            answer = self.de.choose_answer(k)
+            print(k, v, answer)
+            self.assertTrue(answer in v)
 
 if __name__ == '__main__':
     unittest.main()
