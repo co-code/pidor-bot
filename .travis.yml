@@ -12,7 +12,7 @@ install:
   - pip install pep8
 
 script:
-  - pep8 run.py
+  - pep8 run.py dialog util test --exclude example_event.py
   - python -m unittest discover -s test
 
 before_deploy:
