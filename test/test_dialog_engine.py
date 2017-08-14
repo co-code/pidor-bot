@@ -46,7 +46,7 @@ class TestDialogEngine(unittest.TestCase):
                 'гы))))'
             ]
         }
-        
+
         for k, v in ls.items():
             answer = self.de.choose_answer(k)
             print(k, v, answer)
@@ -139,6 +139,7 @@ class TestDialogEngine(unittest.TestCase):
             answer = self.de.choose_answer(k)
             print(k, v, answer)
             self.assertTrue(answer in v)
+
 
 if __name__ == '__main__':
     unittest.main()
