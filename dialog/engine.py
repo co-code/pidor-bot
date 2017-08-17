@@ -24,3 +24,4 @@ class DialogEngine(object):
         for question, answers in data.items():
             if re.match(question, text):
                 return random.choice(answers)
+        return None
