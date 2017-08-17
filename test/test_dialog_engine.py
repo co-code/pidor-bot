@@ -88,6 +88,10 @@ class TestDialogEngine(unittest.TestCase):
             '))))!': [
                 '))))))))))))',
                 'гы))))'
+            ],
+            'лол))))!': [
+                '))))))))))))',
+                'гы))))'
             ]
         }
 
@@ -139,6 +143,14 @@ class TestDialogEngine(unittest.TestCase):
             answer = self.de.choose_answer(k)
             print(k, v, answer)
             self.assertTrue(answer in v)
+
+    def test_some_negative_tests(self):
+        ls = ['+', '-']
+
+        for k in ls:
+            answer = self.de.choose_answer(k)
+            print(k, answer)
+            self.assertTrue(answer is None)
 
 
 if __name__ == '__main__':
