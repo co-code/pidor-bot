@@ -145,7 +145,12 @@ class TestDialogEngine(unittest.TestCase):
             self.assertTrue(answer in v)
 
     def test_some_negative_tests(self):
-        ls = ['+', '-']
+        ls = [
+            '+',
+            '-',
+            '()',
+            'Hello, my name is John (not related to discussion)'
+        ]
 
         for k in ls:
             answer = self.de.choose_answer(k)
