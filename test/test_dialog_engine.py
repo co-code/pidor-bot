@@ -44,6 +44,9 @@ class TestDialogEngine(unittest.TestCase):
             '))))': [
                 '))))))))))))',
                 'гы))))'
+            ],
+            '((((': [
+                '(((((((((((('
             ]
         }
 
@@ -92,6 +95,9 @@ class TestDialogEngine(unittest.TestCase):
             'лол))))!': [
                 '))))))))))))',
                 'гы))))'
+            ],
+            'Вот же ж хрень(((!': [
+                '(((((((((((('
             ]
         }
 
