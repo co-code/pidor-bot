@@ -36,10 +36,13 @@ class TestDialogEngine(unittest.TestCase):
                 'это я люблю',
             ],
             'го': [
-                'го по пиву лучше '
+                'го по пиву лучше'
             ],
             'го гулять': [
-                'го по пиву лучше '
+                'го по пиву лучше'
+            ],
+            'пошли гулять': [
+                'пошли по пиву лучше'
             ],
             '))))': [
                 '))))))))))))',
@@ -80,10 +83,10 @@ class TestDialogEngine(unittest.TestCase):
                 'это я люблю',
             ],
             'го.': [
-                'го по пиву лучше '
+                'го по пиву лучше'
             ],
             'го гулять!': [
-                'го по пиву лучше '
+                'го по пиву лучше'
             ],
             '))))!': [
                 '))))))))))))',
@@ -132,10 +135,10 @@ class TestDialogEngine(unittest.TestCase):
                 'это я люблю',
             ],
             'Го': [
-                'го по пиву лучше '
+                'го по пиву лучше'
             ],
             'гО гулять': [
-                'го по пиву лучше '
+                'го по пиву лучше'
             ]
         }
 
@@ -149,7 +152,8 @@ class TestDialogEngine(unittest.TestCase):
             '+',
             '-',
             '()',
-            'Hello, my name is John (not related to discussion)'
+            'Hello, my name is John (not related to discussion)',
+            'голый',
         ]
 
         for k in ls:
